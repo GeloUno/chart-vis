@@ -2,6 +2,8 @@ import { AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 import { getSystemData, ErrorSystem } from '../controllers/getSystemData';
 import { SystemData } from '../models/systemData';
+import ChartView from './chartView';
+import { nanoid } from 'nanoid';
 
 //
 
@@ -20,7 +22,28 @@ function SystemDataPage() {
     refetchInterval: 10000,
   });
 
-  return <div></div>;
+  if (isLoading) {
+    return <div>loading</div>;
+  }
+  if (isError || data === undefined) {
+    return <div>error</div>;
+  }
+
+  return (
+    <div>
+      <ChartView key={nanoid()} data={data.data.Errors} typeData="Errors" />
+      <ChartView
+        key={nanoid()}
+        data={data?.data.Warnings}
+        typeData="Warnings"
+      />
+      <ChartView
+        key={nanoid()}
+        data={data?.data.Operations}
+        typeData="Operations"
+      />
+    </div>
+  );
 }
 
 export default SystemDataPage;
