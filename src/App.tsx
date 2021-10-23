@@ -6,7 +6,13 @@ function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col h-full items-center justify-center text-white bg-gradient-to-br from-gray-600 via-teal-700 to-gray-800">
+      <div
+        className="flex flex-col h-full items-start justify-start text-white p-0 sm:p-5"
+        style={{
+          background:
+            'linear-gradient(0deg,hsla(225,57%,8%,100%),hsla(175,12%,44%,100%)) no-repeat',
+        }}
+      >
         <SystemDataPage />
         <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />
       </div>
