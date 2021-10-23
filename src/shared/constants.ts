@@ -1,0 +1,1 @@
+export const URL = `https://visualsoft.com.pl/rekrutacja/202009/dane`;
