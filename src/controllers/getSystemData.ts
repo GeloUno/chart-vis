@@ -16,10 +16,10 @@ export class ErrorSystem extends Error {
 
 }
 
-export async function getSystemData(): Promise<SystemData> {
+export async function getSystemData(): Promise<AxiosResponse<SystemData>> {
     try {
         const data: AxiosResponse<SystemData> = await axios.get(URL)
-        return data.data
+        return data
 
     } catch (error: unknown) {
 
