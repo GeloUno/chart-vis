@@ -4,9 +4,10 @@ import { TypeDataSystem } from '../models/TypeDataSystem';
 interface ChartNumberProps extends TypeDataSystem {
   color: string;
   avg: number;
+  lastHour: number;
 }
 
-function ChartNumber({ color, typeData, avg }: ChartNumberProps) {
+function ChartNumber({ color, typeData, avg, lastHour }: ChartNumberProps) {
   return (
     <div
       className={`flex flex-col justify-center w-full pl-12 relative ${
@@ -15,7 +16,7 @@ function ChartNumber({ color, typeData, avg }: ChartNumberProps) {
       style={{ color }}
     >
       <div className=" text-center w-full" style={{ fontSize: '33px' }}>
-        3
+        {`${lastHour}`}
       </div>
       {typeData !== 'Operations' && (
         <div

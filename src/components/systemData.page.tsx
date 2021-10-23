@@ -46,6 +46,15 @@ function SystemDataPage() {
     return <div>error</div>;
   }
 
+  const AvgResponseTime: number = data.data.AvgResponseTime;
+  const AvgResponseTimeAlertLimit: number = data.data.AvgResponseTimeAlertLimit;
+  const AvgResponseTimeWarningLimit: number =
+    data.data.AvgResponseTimeWarningLimit;
+  const DailyErrorCount: number = data.data.DailyErrorCount;
+
+  const LastErrorStr: Date = new Date(data.data.LastErrorStr);
+  const LastSyncStr: Date = new Date(data.data.LastSyncStr);
+
   return (
     <div>
       <div className="py-4">
