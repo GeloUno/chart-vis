@@ -6,6 +6,9 @@ import ChartView from './chartView';
 import { nanoid } from 'nanoid';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { getColorType } from '../shared/colors';
+import { colorDark } from './../shared/colors';
+import ChartTitle from './chartTitle';
+import ChartFooter from './chartFooter';
 //
 
 function SystemDataPage() {
@@ -22,10 +25,6 @@ function SystemDataPage() {
   } = useQuery('systemData', getSystemData, {
     // refetchInterval: 20000,
   });
-  console.log(
-    '<- LOG -> file: systemData.page.tsx -> line 25 -> SystemDataPage -> data',
-    data
-  );
 
   if (isLoading) {
     return (
@@ -56,21 +55,33 @@ function SystemDataPage() {
   const LastSyncStr: Date = new Date(data.data.LastSyncStr);
 
   return (
-    <div>
-      <div className="py-4">
-        <div className={' text-3xl uppercase '}>{data.data.Name}</div>
-        <p className={' text-sm py-2 opacity-50'}>{data.data.Url}</p>
-      </div>
-      <ChartView key={nanoid()} data={data.data.Errors} typeData="Errors" />
+    <div
+      className="p-5"
+      style={{
+        background:
+          'linear-gradient(0deg,hsla(0,0%,0%,24%),hsla(201,76%,23%,32%)) no-repeat',
+      }}
+    >
+      <ChartTitle data={data.data} AvgResponseTime={AvgResponseTime} />
       <ChartView
         key={nanoid()}
-        data={data?.data.Warnings}
+        data={data.data.Errors.slice(0, 38)}
+        typeData="Errors"
+      />
+      <ChartView
+        key={nanoid()}
+        data={data?.data.Warnings.slice(0, 38)}
         typeData="Warnings"
       />
       <ChartView
         key={nanoid()}
-        data={data?.data.Operations}
+        data={data?.data.Operations.slice(0, 38)}
         typeData="Operations"
+      />
+      <ChartFooter
+        lastError={LastErrorStr}
+        sinceLastSynce={LastSyncStr}
+        dailyErrorCount={DailyErrorCount}
       />
     </div>
   );
