@@ -15,3 +15,5 @@ export function getColorType(type: TypeDataSystem): ColorBackgroundSystem {
 
     }
 }
+
+export const colorDark = '#777780';
