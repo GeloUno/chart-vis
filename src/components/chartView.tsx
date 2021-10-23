@@ -4,6 +4,7 @@ import ChartGraph from './chartGraph';
 
 import { getColorType } from '../shared/colors';
 import { TypeDataSystem } from '../models/TypeDataSystem';
+import ChartNumber from './chartNumber';
 
 interface CharViewProps extends TypeDataSystem {
   data?: DataViewChart[];
@@ -11,6 +12,18 @@ interface CharViewProps extends TypeDataSystem {
 
 function getMax(data: DataViewChart[]) {
   return Math.max(...data.map((d) => d.Value));
+}
+function getAvg(data: DataViewChart[]) {
+  const numberHelper = 0;
+
+  const arrayHelper = [...data.map((a) => +a.Value)];
+
+  const sum = arrayHelper.reduce((a, b) => a + b, 0);
+  if (arrayHelper.length === 0) {
+    return 0;
+  }
+
+  return sum / arrayHelper.length;
 }
 
 function ChartView({ data, typeData }: CharViewProps) {
@@ -21,6 +34,8 @@ function ChartView({ data, typeData }: CharViewProps) {
   const color = getColorType({ typeData });
 
   const max = getMax(data);
+
+  const avg = getAvg(data);
 
   return (
     <div className="flex flex-row">
@@ -48,6 +63,7 @@ function ChartView({ data, typeData }: CharViewProps) {
           </div>
         );
       })}
+      <ChartNumber key={nanoid()} color={color} typeData={typeData} avg={avg} />
     </div>
   );
 }
