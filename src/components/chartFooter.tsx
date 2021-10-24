@@ -1,7 +1,23 @@
+import { calculateDifferenceDateParamAndDateNow } from '../controllers/calculateDifferenceDateParamAndDateNow';
+
 interface ChartFooterProps {
   lastError: Date;
   sinceLastSynce: Date;
   dailyErrorCount: number;
+}
+
+interface TimeDiff {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function timeStringBilder(timeDiff: TimeDiff): string {
+  if (timeDiff.minutes && timeDiff.minutes !== 0) {
+    return `${timeDiff.minutes} min ${timeDiff.seconds} sec`;
+  } else {
+    return `${timeDiff.seconds} sec`;
+  }
 }
 
 function ChartFooter({
@@ -9,9 +25,9 @@ function ChartFooter({
   sinceLastSynce,
   dailyErrorCount,
 }: ChartFooterProps) {
-  console.log(
-    '<- LOG -> file: chartFooter.tsx -> line 12 -> sinceLastSynce',
-    sinceLastSynce
+  const diff = calculateDifferenceDateParamAndDateNow(
+    sinceLastSynce,
+    new Date()
   );
 
   return (
@@ -31,14 +47,7 @@ function ChartFooter({
           hour12: false,
         })}
       </p>
-      <p>
-        Since last synce:{' '}
-        {sinceLastSynce.toLocaleString('en-Ca', {
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })}
-      </p>
+      <p>Since last synce: {timeStringBilder(diff)}</p>
       <p>Daily error count: {dailyErrorCount}</p>
     </div>
   );
