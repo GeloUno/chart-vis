@@ -20,8 +20,7 @@ export function calculateDifferenceDateParamAndDateNow(
 
   let dateHelper = new Date(Date.UTC(0, 0, 0, 0, 0, 0, miliseconds));
 
-  const hours = dateHelper.getUTCHours();
   const minutes = dateHelper.getUTCMinutes();
   const seconds = dateHelper.getUTCSeconds();
-  return { hours, minutes, seconds };
+  return { minutes, seconds };
 }

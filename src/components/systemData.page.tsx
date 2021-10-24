@@ -5,7 +5,7 @@ import { SystemData } from '../models/systemData';
 import ChartView from './chartView';
 import { nanoid } from 'nanoid';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import { getColorType, colorDark } from '../shared/colors';
+import { getColorType } from '../shared/colors';
 import ChartTitle from './chartTitle';
 import ChartFooter from './chartFooter';
 import ChartBackground from './chartBackground';
@@ -16,8 +16,7 @@ function SystemDataPage() {
     data,
     isLoading,
     isError,
-  }: // error,
-  {
+  }: {
     data: AxiosResponse<SystemData> | undefined;
     isLoading: boolean;
     isError: boolean;
