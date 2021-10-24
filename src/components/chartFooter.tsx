@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { calculateDifferenceDateParamAndDateNow } from '../controllers/calculateDifferenceDateParamAndDateNow';
+import useInterval from 'use-interval';
 
 interface ChartFooterProps {
   lastError: Date;
@@ -7,14 +9,13 @@ interface ChartFooterProps {
 }
 
 interface TimeDiff {
-  hours: number;
   minutes: number;
   seconds: number;
 }
 
 function timeStringBilder(timeDiff: TimeDiff): string {
   if (timeDiff.minutes && timeDiff.minutes !== 0) {
-    return `${timeDiff.minutes} min ${timeDiff.seconds} sec`;
+    return ` ${timeDiff.minutes} min ${timeDiff.seconds} sec`;
   } else {
     return `${timeDiff.seconds} sec`;
   }
@@ -25,10 +26,15 @@ function ChartFooter({
   sinceLastSynce,
   dailyErrorCount,
 }: ChartFooterProps) {
-  const diff = calculateDifferenceDateParamAndDateNow(
-    sinceLastSynce,
-    new Date()
-  );
+  const [TimerString, setTimerString] = useState('');
+
+  useInterval(() => {
+    const diff = calculateDifferenceDateParamAndDateNow(
+      sinceLastSynce,
+      new Date()
+    );
+    setTimerString(timeStringBilder(diff));
+  }, 1000);
 
   return (
     <div
@@ -47,7 +53,7 @@ function ChartFooter({
           hour12: false,
         })}
       </p>
-      <p>Since last synce: {timeStringBilder(diff)}</p>
+      <p>Since last synce: {TimerString}</p>
       <p>Daily error count: {dailyErrorCount}</p>
     </div>
   );
