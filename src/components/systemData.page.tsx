@@ -44,6 +44,10 @@ function SystemDataPage() {
   if (isError || data === undefined) {
     return <div>error</div>;
   }
+  console.log(
+    '<- LOG -> file: systemData.page.tsx -> line 20 -> SystemDataPage -> data',
+    data.data
+  );
 
   const AvgResponseTime: number = data.data.AvgResponseTime;
   const AvgResponseTimeAlertLimit: number = data.data.AvgResponseTimeAlertLimit;
