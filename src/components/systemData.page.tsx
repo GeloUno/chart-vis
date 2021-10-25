@@ -25,8 +25,7 @@ function SystemDataPage() {
     isError: boolean;
     error: ErrorSystem | null;
   } = useQuery('systemData', getSystemData, {
-    // TODO: uncomment
-    // refetchInterval: 20000,
+    refetchInterval: 20000,
   });
 
   if (isLoading) {
