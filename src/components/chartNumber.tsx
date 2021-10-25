@@ -15,21 +15,14 @@ function ChartNumber({ color, typeData, avg, lastHour }: ChartNumberProps) {
       }`}
       style={{ color }}
     >
-      <div className=" text-center w-full" style={{ fontSize: '33px' }}>
-        {`${lastHour}`}
-      </div>
+      <div className=" text-center w-full text-4xl">{`${lastHour}`}</div>
       {typeData !== 'Operations' && (
-        <div
-          className=" text-center w-full opacity-70"
-          style={{ fontSize: '15px' }}
-        >
+        <div className=" text-center w-full opacity-70 text-sm">
           {`(${Math.floor(avg)})`}
         </div>
       )}
       {typeData === 'Operations' && <div>{''}</div>}
-      <div className=" text-center w-full" style={{ fontSize: '11px' }}>
-        {typeData} in last houer
-      </div>
+      <div className=" text-center w-full text-sm">{typeData} in last hour</div>
     </div>
   );
 }
