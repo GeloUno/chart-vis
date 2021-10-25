@@ -9,9 +9,12 @@ import { getColorType } from '../shared/colors';
 import ChartTitle from './chartTitle';
 import ChartFooter from './chartFooter';
 import ChartBackground from './chartBackground';
-//
+import { useWindowWidth } from '@react-hook/window-size';
 
 function SystemDataPage() {
+  const width = useWindowWidth();
+  const lenghtChart = width > 500 ? 36 : width > 340 ? 18 : 9;
+
   const {
     data,
     isLoading,
@@ -76,17 +79,17 @@ function SystemDataPage() {
         <ChartTitle data={data.data} AvgResponseTime={AvgResponseTime} />
         <ChartView
           key={nanoid()}
-          data={data.data.Errors.slice(0, 38)}
+          data={data.data.Errors.slice(0, lenghtChart)}
           typeData="Errors"
         />
         <ChartView
           key={nanoid()}
-          data={data?.data.Warnings.slice(0, 38)}
+          data={data?.data.Warnings.slice(0, lenghtChart)}
           typeData="Warnings"
         />
         <ChartView
           key={nanoid()}
-          data={data?.data.Operations.slice(0, 38)}
+          data={data?.data.Operations.slice(0, lenghtChart)}
           typeData="Operations"
         />
         <ChartFooter
