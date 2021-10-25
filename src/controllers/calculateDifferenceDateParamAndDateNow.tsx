@@ -22,11 +22,13 @@ export function calculateDifferenceDateParamAndDateNow(
   const secHelper = Math.abs(dateNowTime - dateParamTime);
 
   // second solution greater than 60 minutes
-  // const minutes = Math.floor(secHelper / 60);
-  // const seconds = minutes > 0 ? secHelper - minutes * 60 : secHelper;
-  let dateHelper = new Date(Date.UTC(0, 0, 0, 0, 0, secHelper));
+  const minutes = Math.floor(secHelper / 60);
+  const seconds = minutes > 0 ? secHelper - minutes * 60 : secHelper;
 
-  const minutes = dateHelper.getUTCMinutes();
-  const seconds = dateHelper.getUTCSeconds();
+  // it return days, hours, minutes, seconds
+  // let dateHelper = new Date(Date.UTC(0, 0, 0, 0, 0, secHelper));
+  // const minutes = dateHelper.getUTCMinutes();
+  // const seconds = dateHelper.getUTCSeconds();
+
   return { minutes, seconds };
 }
