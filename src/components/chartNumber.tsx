@@ -15,7 +15,9 @@ function ChartNumber({ color, typeData, avg, lastHour }: ChartNumberProps) {
       }`}
       style={{ color }}
     >
-      <div className=" text-center w-full text-4xl">{`${lastHour}`}</div>
+      <div className=" text-center w-full text-4xl">{`${lastHour.toLocaleString(
+        'fr-FR'
+      )}`}</div>
       {typeData !== 'Operations' && (
         <div className=" text-center w-full opacity-70 text-sm">
           {`(${Math.floor(avg)})`}
