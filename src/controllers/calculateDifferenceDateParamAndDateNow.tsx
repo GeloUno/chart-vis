@@ -1,7 +1,10 @@
 export function calculateDifferenceDateParamAndDateNow(
-  dateParam: Date,
-  dateNow: Date
+  dateCompare: Date,
+  dateNowParam?: Date
 ) {
+  const dateParam = new Date(dateCompare);
+  const dateNow = dateNowParam ? dateNowParam : new Date();
+
   const offsetParam = dateParam.getTimezoneOffset() / 60;
 
   const offsetNow = dateNow.getTimezoneOffset() / 60;
@@ -14,11 +17,14 @@ export function calculateDifferenceDateParamAndDateNow(
     dateNow.setHours(dateNow.getHours() - offsetNow)
   );
 
-  const dateParamTime = dateParamHelper.getTime();
-  const dateNowTime = dateNowHelper.getTime();
-  const miliseconds = Math.abs(dateNowTime - dateParamTime);
+  const dateParamTime = Math.floor(dateParamHelper.getTime() / 1000);
+  const dateNowTime = Math.floor(dateNowHelper.getTime() / 1000);
+  const secHelper = Math.abs(dateNowTime - dateParamTime);
 
-  let dateHelper = new Date(Date.UTC(0, 0, 0, 0, 0, 0, miliseconds));
+  // second solution greater than 60 minutes
+  // const minutes = Math.floor(secHelper / 60);
+  // const seconds = minutes > 0 ? secHelper - minutes * 60 : secHelper;
+  let dateHelper = new Date(Date.UTC(0, 0, 0, 0, 0, secHelper));
 
   const minutes = dateHelper.getUTCMinutes();
   const seconds = dateHelper.getUTCSeconds();
