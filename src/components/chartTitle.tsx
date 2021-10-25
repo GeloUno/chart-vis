@@ -19,7 +19,7 @@ function ChartTitle({ data, AvgResponseTime }: ChartTitleProps) {
       </div>
       <div className=" flex flex-col justify-center text-center text-sm sm:text-2xl ">
         <h4 className="text-2xl" style={{ color: colorDark }}>
-          {AvgResponseTime}ms
+          {AvgResponseTime.toLocaleString('fr-FR')}ms
         </h4>
         <p className="text-xs" style={{ color: colorDark }}>
           Average response time
