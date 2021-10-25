@@ -61,10 +61,6 @@ function SystemDataPage() {
       </ChartBackground>
     );
   }
-  console.log(
-    '<- LOG -> file: systemData.page.tsx -> line 20 -> SystemDataPage -> data',
-    data.data
-  );
 
   const AvgResponseTime: number = data.data.AvgResponseTime;
   const DailyErrorCount: number = data.data.DailyErrorCount;
